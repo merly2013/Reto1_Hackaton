@@ -1315,16 +1315,16 @@ function calcularAhorro() {
 
 function crearGrafico(consumo, energiaGenerada, tarifa, ahorro) {
     const ctx = document.getElementById('savingsChart').getContext('2d');
-    
+
     // Destruir gráfico anterior si existe
     if (window.solarChart) {
         window.solarChart.destroy();
     }
-    
+
     const consumoActual = consumo * tarifa;
     const consumoConPaneles = (consumo - Math.min(energiaGenerada, consumo)) * tarifa;
     const ahorroCalculado = consumoActual - consumoConPaneles;
-    
+
     window.solarChart = new Chart(ctx, {
         type: 'bar',
         data: {
@@ -1332,21 +1332,17 @@ function crearGrafico(consumo, energiaGenerada, tarifa, ahorro) {
             datasets: [{
                 label: 'Valor en pesos ($)',
                 data: [consumoActual, consumoConPaneles, ahorroCalculado],
-                backgroundColor: [
-                    'rgba(231, 76, 60, 0.7)',
-                    'rgba(46, 204, 113, 0.7)',
-                    'rgba(52, 152, 219, 0.7)'
-                ],
-                borderColor: [
-                    'rgba(231, 76, 60, 1)',
-                    'rgba(46, 204, 113, 1)',
-                    'rgba(52, 152, 219, 1)'
-                ],
+                backgroundColor: ['#ff6b6b', '#4ecdc4', '#ffe66d'],
+                borderColor: ['#ff6b6b', '#4ecdc4', '#ffe66d'],
                 borderWidth: 1
             }]
         },
         options: {
             responsive: true,
+            animation: {
+                duration: 1500, // ⏱ 1.5 segundos
+                easing: 'easeOutBounce' // 🎯 efecto rebote al cargar
+            },
             scales: {
                 y: {
                     beginAtZero: true,
@@ -1380,7 +1376,6 @@ function crearGrafico(consumo, energiaGenerada, tarifa, ahorro) {
         }
     });
 }
-
 window.onload = function () {
   cargarDepartamentos();
 };
