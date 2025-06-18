@@ -1309,22 +1309,22 @@ function calcularAhorro() {
     // Mostrar sección de resultados
     document.getElementById('results').classList.remove('hidden');
     
-    // Crear gráfico
+// Crear gráfico
     crearGrafico(consumo, energiaGenerada, tarifa, ahorro);
 }
 
 function crearGrafico(consumo, energiaGenerada, tarifa, ahorro) {
     const ctx = document.getElementById('savingsChart').getContext('2d');
-
+    
     // Destruir gráfico anterior si existe
     if (window.solarChart) {
         window.solarChart.destroy();
     }
-
+    
     const consumoActual = consumo * tarifa;
     const consumoConPaneles = (consumo - Math.min(energiaGenerada, consumo)) * tarifa;
     const ahorroCalculado = consumoActual - consumoConPaneles;
-
+    
     window.solarChart = new Chart(ctx, {
         type: 'bar',
         data: {
@@ -1340,9 +1340,10 @@ function crearGrafico(consumo, energiaGenerada, tarifa, ahorro) {
         options: {
             responsive: true,
             animation: {
-                duration: 1500, // ⏱ 1.5 segundos
-                easing: 'easeOutBounce' // 🎯 efecto rebote al cargar
+                duration: 1500, // 1.5 segundos
+                easing: 'easeOutBounce' // Efecto rebote al cargar
             },
+
             scales: {
                 y: {
                     beginAtZero: true,
@@ -1376,7 +1377,9 @@ function crearGrafico(consumo, energiaGenerada, tarifa, ahorro) {
         }
     });
 }
+
 window.onload = function () {
   cargarDepartamentos();
 };
+
 
